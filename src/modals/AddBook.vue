@@ -42,7 +42,7 @@
         return authors.map(({ firstName, id, lastName }) => {
           return {
             id,
-            name: `${lastName}, ${firstName}`,
+            label: `${lastName}, ${firstName}`,
             value: id,
           };
         });

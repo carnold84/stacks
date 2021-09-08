@@ -1,13 +1,12 @@
 <template>
   <div class="c_multiselect">
     <multiselect
-      v-model="inputVal"
-      :customLabel="label"
-      :hideSelected="true"
+      :model-value="inputVal"
       :options="options"
+      label="label"
       :multiple="isMulti"
-      :placeholder="placeholder"
       track-by="id"
+      @update:model-value="inputVal = $event"
     />
   </div>
 </template>
@@ -20,59 +19,69 @@
     components: {
       Multiselect,
     },
+    data() {
+      return {
+        inputVal: this.value,
+      };
+    },
     props: {
       isMulti: {
-        type: Boolean,
         default: false,
+        type: Boolean,
       },
       options: {
-        type: Array,
         required: true,
+        type: Array,
       },
       placeholder: String,
       value: {
-        required: true,
+        default() {
+          return null;
+        },
         type: [Array, Object],
-      },
-    },
-    updated() {
-      console.log(this.options);
-    },
-    computed: {
-      inputVal: {
-        get() {
-          console.log('get', this.value);
-          return this.value;
-        },
-        set(val) {
-          console.log('set', this.val);
-          this.$emit('input', val);
-        },
-      },
-    },
-    methods: {
-      label(item) {
-        return item.label;
       },
     },
   };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
-<style scoped>
+<style lang="scss" scoped>
   .c_multiselect {
     flex-grow: 1;
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
     display: flex;
+
+    .multiselect__tag {
+      background: var(--primary);
+    }
+    .multiselect__tag-icon {
+      &:focus {
+        background: var(--primary);
+      }
+      &:hover {
+        background: var(--primary__HOVER);
+      }
+      &:after {
+        color: #ffffff;
+      }
+    }
+    .multiselect__option--highlight {
+      background: var(--primary);
+    }
+    .multiselect__option--highlight::after {
+      background: var(--primary);
+    }
   }
 </style>
+
 <style lang="scss">
   .multiselect__tag {
     background: var(--primary);
   }
+
   .multiselect__tag-icon {
     &:focus {
       background: var(--primary);
@@ -84,9 +93,11 @@
       color: #ffffff;
     }
   }
+
   .multiselect__option--highlight {
     background: var(--primary);
   }
+
   .multiselect__option--highlight::after {
     background: var(--primary);
   }

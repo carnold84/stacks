@@ -13,7 +13,7 @@
     "register-service-worker": "^1.7.1",
     "uuid": "^3.4.0",
     "vue": "^3.0.0",
-    "vue-multiselect": "^2.1.6",
+    "vue-multiselect": "^3.0.0-alpha.2",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
