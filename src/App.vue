@@ -1,30 +1,88 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <c-header-bar>
+    <template v-slot:content-left>
+      <c-logo style="margin: 0 10px 0 0" />
+      <c-typography component="h1" style="margin: 0" variant="h5">
+        Stacks
+      </c-typography>
+    </template>
+    <template v-slot:content-right>
+      <c-link
+        component="router-link"
+        :is-inverted="true"
+        style="margin: 0 10px 0 0"
+        to="/"
+      >
+        Books
+      </c-link>
+      <c-link
+        component="router-link"
+        :is-inverted="true"
+        style="margin: 0 10px 0 0"
+        to="/"
+      >
+        Authors
+      </c-link>
+      <c-link
+        component="router-link"
+        :is-inverted="true"
+        style="margin: 0 10px 0 0"
+        to="/"
+      >
+        Series
+      </c-link>
+    </template>
+  </c-header-bar>
   <router-view />
 </template>
 
+<script>
+  import CHeaderBar from './components/CHeaderBar.vue';
+  import CLink from './components/CLink.vue';
+  import CLogo from './components/CLogo.vue';
+  import CTypography from './components/CTypography.vue';
+
+  export default {
+    components: { CHeaderBar, CLogo, CTypography, CLink },
+  };
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  :root {
+    --base_font_size: 10px;
+    --primary: #1e70ce;
+    --secondary: #e98400;
 
-#nav {
-  padding: 30px;
+    --font-family-primary: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+    --font-color-primary: rgba(0, 0, 0, 0.8);
+    --font-color-secondary: rgba(0, 0, 0, 0.5);
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    --logo-fill: #ffffff;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    --button-bg-color: #ffffff;
+    --button-bg-color__HOVER: var(--button-bg-color);
+    --button-border-color: #eeeeee;
+    --button-border-color__HOVER: var(--button-border-color);
+    --button-primary-bg-color: var(--primary);
+    --button-primary-border-color: var(--primary);
+    --button-primary-bg-color__HOVER: var(--primary);
+    --button-primary-border-color__HOVER: var(--primary);
+    --loading-icon-color: var(--primary);
   }
-}
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    font-size: var(--base_font_size);
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
 </style>
