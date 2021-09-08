@@ -3,7 +3,6 @@
     :is="component"
     :class="['c_button', { is_primary: isPrimary, is_round: isRound }]"
     :to="to"
-    @click="$emit('click')"
   >
     <slot></slot>
   </component>
@@ -47,9 +46,10 @@
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 0 1px 1px;
     color: var(--font-color-secondary);
-    fill: var(--font-color-secondary);
     cursor: pointer;
     display: inline-flex;
+    fill: var(--font-color-secondary);
+    font-family: var(--font-family-primary);
     font-size: 14px;
     height: 34px;
     justify-content: center;

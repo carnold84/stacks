@@ -7,7 +7,7 @@
         </c-typography>
       </template>
       <template v-slot:content-right>
-        <c-button component="router-link" :is-round="true" to="/authors/add">
+        <c-button :is-round="true" @click="onAddBook">
           <svg height="18px" viewBox="0 0 24 24" width="18px">
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
@@ -91,14 +91,14 @@
 </template>
 
 <script>
-  import CActionBar from '../components/CActionBar.vue';
-  import CButton from '../components/CButton.vue';
-  import CLink from '../components/CLink.vue';
-  import CTable from '../components/CTable.vue';
-  import CTableCell from '../components/CTableCell.vue';
-  import CTableRow from '../components/CTableRow.vue';
-  import CTypography from '../components/CTypography.vue';
-  import LCentredColumn from '../layouts/LCentredColumn.vue';
+  import CActionBar from '@/components/CActionBar.vue';
+  import CButton from '@/components/CButton.vue';
+  import CLink from '@/components/CLink.vue';
+  import CTable from '@/components/CTable.vue';
+  import CTableCell from '@/components/CTableCell.vue';
+  import CTableRow from '@/components/CTableRow.vue';
+  import CTypography from '@/components/CTypography.vue';
+  import LCentredColumn from '@/layouts/LCentredColumn.vue';
 
   export default {
     name: 'Home',
@@ -118,12 +118,14 @@
       },
     },
     methods: {
+      onAddBook() {
+        this.$store.dispatch('modals/add', {
+          type: 'addBook',
+        });
+      },
       onDelete(id) {
         this.$store.dispatch('books/delete', id);
       },
-    },
-    mounted() {
-      console.log(this.books);
     },
   };
 </script>

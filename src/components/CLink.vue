@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import CTypography from './CTypography.vue';
+  import CTypography from '@/components/CTypography.vue';
 
   export default {
     components: { CTypography },

@@ -60,6 +60,11 @@ export default {
     ],
   },
   getters: {
+    getAll(state) {
+      return state.authors.allIds.map((id) => {
+        return state.authors.byId[id];
+      });
+    },
     getByBookId: (state) => (id) => {
       const authors = [];
       state.authorBook.forEach(({ authorId, bookId }) => {
@@ -70,6 +75,9 @@ export default {
       });
 
       return authors;
+    },
+    getById: (state) => (id) => {
+      return state.authors.byId[id];
     },
   },
   mutations: {},

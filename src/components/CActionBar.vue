@@ -25,18 +25,18 @@
 
 <style lang="scss" scoped>
   .c_action_bar {
-    width: 100%;
-    height: 40px;
-    font-size: 1em;
-    margin: 0;
-    flex-shrink: 0;
-    justify-content: space-between;
     align-items: center;
-    flex-direction: row;
     display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    font-size: 1em;
+    justify-content: space-between;
+    margin: 0;
+    padding: 5px 0;
+    width: 100%;
 
     &.has-border {
-      border-bottom: #dddddd solid 1px;
+      border-bottom: #eeeeee solid 1px;
     }
   }
 </style>

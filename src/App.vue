@@ -34,16 +34,18 @@
     </template>
   </c-header-bar>
   <router-view />
+  <modal-manager />
 </template>
 
 <script>
-  import CHeaderBar from './components/CHeaderBar.vue';
-  import CLink from './components/CLink.vue';
-  import CLogo from './components/CLogo.vue';
-  import CTypography from './components/CTypography.vue';
+  import CHeaderBar from '@/components/CHeaderBar.vue';
+  import CLink from '@/components/CLink.vue';
+  import CLogo from '@/components/CLogo.vue';
+  import CTypography from '@/components/CTypography.vue';
+  import ModalManager from './managers/ModalManager.vue';
 
   export default {
-    components: { CHeaderBar, CLogo, CTypography, CLink },
+    components: { CHeaderBar, CLogo, CTypography, CLink, ModalManager },
   };
 </script>
 
@@ -56,6 +58,14 @@
     --font-family-primary: 'Roboto Condensed', Helvetica, Arial, sans-serif;
     --font-color-primary: rgba(0, 0, 0, 0.8);
     --font-color-secondary: rgba(0, 0, 0, 0.5);
+
+    --c_textField_icon_fill: var(--font-color-primary);
+    --c_textField_label_color: var(--font-color-primary);
+    --c_textField_field_bgColor: #ffffff;
+    --c_textField_field_borderColor: #eeeeee;
+    --c_textField_field_borderColor__focus: var(--primary);
+    --c_textField_field_color: var(--font-color-secondary);
+    --c_textField_error_color: #a70008;
 
     --logo-fill: #ffffff;
 
@@ -79,7 +89,7 @@
   html {
     -webkit-font-smoothing: antialiased;
     font-size: var(--base_font_size);
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--font-family-primary);
   }
 
   body {
