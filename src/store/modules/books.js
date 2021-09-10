@@ -1,4 +1,4 @@
-import api from '../../api/demo';
+import api from '@/api';
 
 export default {
   namespaced: true,
@@ -28,6 +28,7 @@ export default {
   },
   actions: {
     async add({ commit }, payload) {
+      console.log(payload);
       const book = await api.books.create(payload);
 
       console.log(book);
@@ -37,10 +38,17 @@ export default {
     delete({ commit }, payload) {
       commit('delete', payload);
     },
+    async load({ commit }) {
+      const books = await api.books.getAll();
+
+      books.forEach((element) => {
+        commit('add', element);
+      });
+    },
   },
   mutations: {
     add(state, book) {
-      state.books.allIds.push(book);
+      state.books.allIds.push(book.id);
       state.books.byId[book.id] = book;
     },
     delete(state, id) {

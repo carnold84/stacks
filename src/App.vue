@@ -1,5 +1,6 @@
 <template>
-  <l-app>
+  <c-message-screen v-if="isLoading">Loading...</c-message-screen>
+  <l-app v-else>
     <template v-slot:header>
       <c-header-bar>
         <template v-slot:content-left>
@@ -48,9 +49,30 @@
   import CTypography from '@/components/CTypography.vue';
   import ModalManager from './managers/ModalManager.vue';
   import LApp from './layouts/LApp.vue';
+  import CMessageScreen from './components/CMessageScreen.vue';
 
   export default {
-    components: { CHeaderBar, CLogo, CTypography, CLink, ModalManager, LApp },
+    components: {
+      CHeaderBar,
+      CLogo,
+      CTypography,
+      CLink,
+      ModalManager,
+      LApp,
+      CMessageScreen,
+    },
+    data() {
+      return {
+        isLoading: false,
+      };
+    },
+    async mounted() {
+      this.isLoading = true;
+
+      await this.$store.dispatch('loadData');
+
+      this.isLoading = false;
+    },
   };
 </script>
 

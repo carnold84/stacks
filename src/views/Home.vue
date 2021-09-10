@@ -15,9 +15,6 @@
         </c-button>
       </template>
     </c-action-bar>
-    <c-message-screen v-if="isLoading" style="height: 300px">
-      Loading...
-    </c-message-screen>
     <c-message-screen v-if="books?.length === 0" style="height: 200px">
       No books
     </c-message-screen>

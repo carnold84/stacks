@@ -1,3 +1,5 @@
+import api from '@/api';
+
 export default {
   namespaced: true,
   state: {
@@ -28,6 +30,19 @@ export default {
       return state.authors.byId[id];
     },
   },
-  mutations: {},
-  actions: {},
+  actions: {
+    async load({ commit }) {
+      const authors = await api.authors.getAll();
+
+      authors.forEach((element) => {
+        commit('add', element);
+      });
+    },
+  },
+  mutations: {
+    add(state, author) {
+      state.authors.allIds.push(author.id);
+      state.authors.byId[author.id] = author;
+    },
+  },
 };

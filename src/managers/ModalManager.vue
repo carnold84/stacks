@@ -35,19 +35,21 @@
       },
     },
     methods: {
-      onAccept({ id, onAccept }) {
-        this.$store.dispatch('modals/remove', id);
-
+      async onAccept({ id, onAccept }) {
         if (onAccept) {
-          onAccept();
+          await onAccept();
         }
-      },
-      onCancel({ id, onCancel }) {
-        this.$store.dispatch('modals/remove', id);
 
+        console.log('onAccept manager');
+
+        this.$store.dispatch('modals/remove', id);
+      },
+      async onCancel({ id, onCancel }) {
         if (onCancel) {
-          onCancel();
+          await onCancel();
         }
+
+        this.$store.dispatch('modals/remove', id);
       },
     },
   };

@@ -7,24 +7,22 @@
       </label>
       <textarea
         v-if="type === 'textarea'"
+        v-model="value"
         class="field"
         :id="id"
-        :model-value="inputVal"
         :placeholder="placeholder"
         @blur="onBlur"
         @focus="onFocus"
-        @update:model-value="inputVal = $event"
       />
       <input
         v-else
+        v-model="value"
         class="field"
         :id="id"
-        :model-value="inputVal"
         :placeholder="placeholder"
         :type="type"
         @blur="onBlur"
         @focus="onFocus"
-        @update:model-value="inputVal = $event"
       />
       <span v-if="error" class="error">
         {{ error }}
@@ -60,16 +58,16 @@
         type: Boolean,
       },
       label: String,
+      modelValue: {
+        default() {
+          return '';
+        },
+        type: String,
+      },
       placeholder: String,
       type: {
         default() {
           return 'text';
-        },
-        type: String,
-      },
-      value: {
-        default() {
-          return '';
         },
         type: String,
       },
@@ -105,12 +103,12 @@
       },
     },
     computed: {
-      inputVal: {
+      value: {
         get() {
-          return this.value;
+          return this.modelValue;
         },
-        set(val) {
-          this.$emit('input', val);
+        set(value) {
+          this.$emit('update:modelValue', value);
         },
       },
     },

@@ -6,11 +6,15 @@
     @accept="onSave"
     @cancel="$emit('cancel', this.id)"
   >
-    <l-form>
+    <c-message-screen v-if="isSaving" style="min-height: 200px">
+      Saving...
+    </c-message-screen>
+    <l-form v-else>
       <template v-slot:fields>
         <c-text-field
           v-model="title"
           id="title"
+          :is-required="true"
           label="Book Title"
           style="margin: 0 0 20px"
         />
@@ -43,6 +47,7 @@
   import LForm from '@/layouts/LForm.vue';
   import CModal from '@/components/CModal.vue';
   import CMultiselect from '@/components/CMultiselect.vue';
+  import CMessageScreen from '../components/CMessageScreen.vue';
 
   export default {
     name: 'AddBook',
@@ -51,6 +56,7 @@
       LForm,
       CModal,
       CMultiselect,
+      CMessageScreen,
     },
     data() {
       return {
@@ -93,9 +99,9 @@
     },
     methods: {
       async onSave() {
-        console.log('save', this.title, this.authors, this.series);
-
         this.isSaving = true;
+
+        console.log('onSave');
 
         await this.$store.dispatch('books/add', {
           authors: this.authors,
@@ -103,6 +109,8 @@
           series: this.series,
           title: this.title,
         });
+
+        console.log('dispatched');
 
         this.isSaving = false;
 

@@ -1,3 +1,3 @@
-import demoApi from '@api/demo';
+import demoApi from '@/api/demo';
 
 export default demoApi;
