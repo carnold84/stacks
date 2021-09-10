@@ -1,39 +1,43 @@
 <template>
-  <c-header-bar>
-    <template v-slot:content-left>
-      <c-logo style="margin: 0 10px 0 0" />
-      <c-typography component="h1" style="margin: 0" variant="h5">
-        Stacks
-      </c-typography>
+  <l-app>
+    <template v-slot:header>
+      <c-header-bar>
+        <template v-slot:content-left>
+          <c-logo style="margin: 0 10px 0 0" />
+          <c-typography component="h1" style="margin: 0" variant="h5">
+            Stacks
+          </c-typography>
+        </template>
+        <template v-slot:content-right>
+          <c-link
+            component="router-link"
+            :is-inverted="true"
+            style="margin: 0 10px 0 0"
+            to="/"
+          >
+            Books
+          </c-link>
+          <c-link
+            component="router-link"
+            :is-inverted="true"
+            style="margin: 0 10px 0 0"
+            to="/"
+          >
+            Authors
+          </c-link>
+          <c-link
+            component="router-link"
+            :is-inverted="true"
+            style="margin: 0 10px 0 0"
+            to="/"
+          >
+            Series
+          </c-link>
+        </template>
+      </c-header-bar>
     </template>
-    <template v-slot:content-right>
-      <c-link
-        component="router-link"
-        :is-inverted="true"
-        style="margin: 0 10px 0 0"
-        to="/"
-      >
-        Books
-      </c-link>
-      <c-link
-        component="router-link"
-        :is-inverted="true"
-        style="margin: 0 10px 0 0"
-        to="/"
-      >
-        Authors
-      </c-link>
-      <c-link
-        component="router-link"
-        :is-inverted="true"
-        style="margin: 0 10px 0 0"
-        to="/"
-      >
-        Series
-      </c-link>
-    </template>
-  </c-header-bar>
-  <router-view />
+    <router-view />
+  </l-app>
   <modal-manager />
 </template>
 
@@ -43,9 +47,10 @@
   import CLogo from '@/components/CLogo.vue';
   import CTypography from '@/components/CTypography.vue';
   import ModalManager from './managers/ModalManager.vue';
+  import LApp from './layouts/LApp.vue';
 
   export default {
-    components: { CHeaderBar, CLogo, CTypography, CLink, ModalManager },
+    components: { CHeaderBar, CLogo, CTypography, CLink, ModalManager, LApp },
   };
 </script>
 

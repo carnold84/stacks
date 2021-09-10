@@ -2,7 +2,7 @@
   <div class="c_modal">
     <div class="modal" :style="{ maxWidth }">
       <header class="header">
-        <c-typography v-if="title" class="title" component="h2" variant="h4">
+        <c-typography v-if="title" class="title" component="h2" variant="h3">
           {{ title }}
         </c-typography>
       </header>

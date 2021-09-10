@@ -7,22 +7,24 @@
       </label>
       <textarea
         v-if="type === 'textarea'"
-        v-model="inputVal"
-        @blur="onBlur"
-        @focus="onFocus"
         class="field"
         :id="id"
+        :model-value="inputVal"
         :placeholder="placeholder"
+        @blur="onBlur"
+        @focus="onFocus"
+        @update:model-value="inputVal = $event"
       />
       <input
         v-else
-        v-model="inputVal"
-        @blur="onBlur"
-        @focus="onFocus"
         class="field"
         :id="id"
+        :model-value="inputVal"
         :placeholder="placeholder"
         :type="type"
+        @blur="onBlur"
+        @focus="onFocus"
+        @update:model-value="inputVal = $event"
       />
       <span v-if="error" class="error">
         {{ error }}
@@ -121,60 +123,60 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .c_text_field {
     display: flex;
-  }
 
-  .c_text_field /deep/ svg {
-    fill: var(--c_textField_icon_fill);
-    height: 20px;
-    margin: 5px 10px 0 0;
-    width: 20px;
-  }
+    &:deep(svg) {
+      fill: var(--c_textField_icon_fill);
+      height: 20px;
+      margin: 5px 10px 0 0;
+      width: 20px;
+    }
 
-  .c_text_field .content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
+    .content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
-  .c_text_field label {
-    color: var(--c_textField_label_color);
-    font-size: 1.3rem;
-    font-weight: 300;
-    margin: 0 0 4px;
-  }
+    label {
+      color: var(--c_textField_label_color);
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin: 0 0 4px;
+    }
 
-  .c_text_field .field {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid var(--c_textField_field_borderColor);
-    color: var(--c_textField_field_color);
-    font-family: inherit;
-    font-size: 1.4rem;
-    margin: 0;
-    padding: 7px 0;
-  }
+    .field {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid var(--c_textField_field_borderColor);
+      color: var(--c_textField_field_color);
+      font-family: inherit;
+      font-size: 1.4rem;
+      margin: 0;
+      padding: 7px 0;
+    }
 
-  .c_text_field.is_large .field {
-    font-size: 2rem;
-  }
+    &.is_large .field {
+      font-size: 2rem;
+    }
 
-  .c_text_field textarea.field {
-    flex-grow: 1;
-    min-height: 90px;
-  }
+    textarea.field {
+      flex-grow: 1;
+      min-height: 90px;
+    }
 
-  .c_text_field .field:focus {
-    border-bottom: 1px solid var(--c_textField_field_borderColor__focus);
-    outline: none;
-  }
+    .field:focus {
+      border-bottom: 1px solid var(--c_textField_field_borderColor__focus);
+      outline: none;
+    }
 
-  .c_text_field .error {
-    color: var(--c_textField_error_color);
-    font-size: 1.4rem;
-    font-weight: 300;
-    margin: 5px 0 0;
+    .error {
+      color: var(--c_textField_error_color);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin: 5px 0 0;
+    }
   }
 </style>

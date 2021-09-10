@@ -4,12 +4,35 @@
     :id="id"
     title="Add Book"
     @accept="onSave"
-    @cancel="$emit('cancel')"
+    @cancel="$emit('cancel', this.id)"
   >
     <l-form>
       <template v-slot:fields>
-        <c-text-field v-model="name" id="name" label="Book Name" />
-        <c-multiselect v-model="authors" :is-multi="true" :options="options" />
+        <c-text-field
+          v-model="title"
+          id="title"
+          label="Book Title"
+          style="margin: 0 0 20px"
+        />
+        <c-multiselect
+          v-model="authors"
+          :is-multi="true"
+          :options="authorOptions"
+          placeholder="Select authors..."
+          style="margin: 0 0 20px"
+        />
+        <c-multiselect
+          v-model="series"
+          :is-multi="false"
+          :options="seriesOptions"
+          placeholder="Select series..."
+          style="margin: 0 0 20px"
+        />
+        <c-text-field
+          v-model="bookNumber"
+          id="bookNumber"
+          label="Book Number"
+        />
       </template>
     </l-form>
   </c-modal>
@@ -32,17 +55,31 @@
     data() {
       return {
         authors: [],
-        name: '',
+        bookNumber: null,
+        isSaving: false,
+        series: null,
+        title: '',
       };
     },
     computed: {
-      options() {
+      authorOptions() {
         const authors = this.$store.getters['authors/getAll'];
 
         return authors.map(({ firstName, id, lastName }) => {
           return {
             id,
             label: `${lastName}, ${firstName}`,
+            value: id,
+          };
+        });
+      },
+      seriesOptions() {
+        const series = this.$store.getters['series/getAll'];
+
+        return series.map(({ id, title }) => {
+          return {
+            id,
+            label: title,
             value: id,
           };
         });
@@ -55,8 +92,21 @@
       },
     },
     methods: {
-      onSave() {
-        console.log('save');
+      async onSave() {
+        console.log('save', this.title, this.authors, this.series);
+
+        this.isSaving = true;
+
+        await this.$store.dispatch('books/add', {
+          authors: this.authors,
+          bookNumber: this.bookNumber,
+          series: this.series,
+          title: this.title,
+        });
+
+        this.isSaving = false;
+
+        this.$emit('cancel', this.id);
       },
     },
   };

@@ -15,7 +15,13 @@
         </c-button>
       </template>
     </c-action-bar>
-    <c-table>
+    <c-message-screen v-if="isLoading" style="height: 300px">
+      Loading...
+    </c-message-screen>
+    <c-message-screen v-if="books?.length === 0" style="height: 200px">
+      No books
+    </c-message-screen>
+    <c-table v-if="books?.length > 0">
       <template v-slot:body>
         <c-table-row v-for="book of books" :key="book.id">
           <c-table-cell>
@@ -99,6 +105,7 @@
   import CTableRow from '@/components/CTableRow.vue';
   import CTypography from '@/components/CTypography.vue';
   import LCentredColumn from '@/layouts/LCentredColumn.vue';
+  import CMessageScreen from '../components/CMessageScreen.vue';
 
   export default {
     name: 'Home',
@@ -111,6 +118,7 @@
       CLink,
       CTypography,
       CActionBar,
+      CMessageScreen,
     },
     computed: {
       books() {

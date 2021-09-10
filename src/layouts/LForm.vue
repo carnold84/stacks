@@ -3,7 +3,7 @@
     <div class="fields">
       <slot name="fields"></slot>
     </div>
-    <div class="buttons">
+    <div v-if="$slots.buttons" class="buttons">
       <slot name="buttons"></slot>
     </div>
   </div>
@@ -22,13 +22,14 @@
     width: 100%;
 
     .fields {
-      margin: 0 0 20px;
+      margin: 0;
       width: 100%;
     }
 
     .buttons {
       display: flex;
       justify-content: flex-end;
+      margin: 20px 0 0 0;
       width: 100%;
 
       &::v-deep > * {

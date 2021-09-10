@@ -1,12 +1,13 @@
 <template>
   <div class="c_multiselect">
     <multiselect
-      :model-value="inputVal"
+      v-model="value"
+      :hideSelected="true"
       :options="options"
       label="label"
       :multiple="isMulti"
+      :placeholder="placeholder"
       track-by="id"
-      @update:model-value="inputVal = $event"
     />
   </div>
 </template>
@@ -19,26 +20,32 @@
     components: {
       Multiselect,
     },
-    data() {
-      return {
-        inputVal: this.value,
-      };
-    },
+    emits: ['update:modelValue'],
     props: {
       isMulti: {
         default: false,
         type: Boolean,
+      },
+      modelValue: {
+        default() {
+          return null;
+        },
+        type: [Array, Object],
       },
       options: {
         required: true,
         type: Array,
       },
       placeholder: String,
+    },
+    computed: {
       value: {
-        default() {
-          return null;
+        get() {
+          return this.modelValue;
         },
-        type: [Array, Object],
+        set(value) {
+          this.$emit('update:modelValue', value);
+        },
       },
     },
   };
@@ -54,10 +61,11 @@
     flex-direction: row;
     display: flex;
 
-    .multiselect__tag {
+    &:deep(.multiselect__tag) {
       background: var(--primary);
     }
-    .multiselect__tag-icon {
+
+    &:deep(.multiselect__tag-icon) {
       &:focus {
         background: var(--primary);
       }
@@ -68,37 +76,13 @@
         color: #ffffff;
       }
     }
-    .multiselect__option--highlight {
+
+    &:deep(.multiselect__option--highlight) {
       background: var(--primary);
     }
-    .multiselect__option--highlight::after {
+
+    &:deep(.multiselect__option--highlight::after) {
       background: var(--primary);
     }
-  }
-</style>
-
-<style lang="scss">
-  .multiselect__tag {
-    background: var(--primary);
-  }
-
-  .multiselect__tag-icon {
-    &:focus {
-      background: var(--primary);
-    }
-    &:hover {
-      background: var(--primary__HOVER);
-    }
-    &:after {
-      color: #ffffff;
-    }
-  }
-
-  .multiselect__option--highlight {
-    background: var(--primary);
-  }
-
-  .multiselect__option--highlight::after {
-    background: var(--primary);
   }
 </style>
