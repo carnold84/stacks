@@ -28,15 +28,14 @@ export default {
   },
   actions: {
     async add({ commit }, payload) {
-      console.log(payload);
       const book = await api.books.create(payload);
-
-      console.log(book);
 
       commit('add', book);
     },
-    delete({ commit }, payload) {
-      commit('delete', payload);
+    async delete({ commit }, payload) {
+      const deletedBook = await api.books.delete(payload);
+
+      commit('delete', deletedBook.id);
     },
     async load({ commit }) {
       const books = await api.books.getAll();

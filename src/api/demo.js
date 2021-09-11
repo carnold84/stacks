@@ -133,7 +133,7 @@ const request = (callback) => {
       } catch (err) {
         reject(err);
       }
-    }, 1500);
+    }, 500);
   });
 };
 
@@ -226,7 +226,6 @@ const api = {
     create: async (data) => {
       return await request(async () => {
         const date = getNowUTC();
-        console.log(data);
 
         const nextBook = {
           authorIds: data?.authors.map(({ id }) => id),
@@ -263,9 +262,7 @@ const api = {
 
         await setState(state);
 
-        return {
-          data: deletedBook,
-        };
+        return deletedBook;
       });
     },
     getAll: async () => {
@@ -314,7 +311,6 @@ const api = {
     create: async (data) => {
       return await request(async () => {
         const date = getNowUTC();
-        console.log(date);
 
         const nextSeries = {
           ...data,
