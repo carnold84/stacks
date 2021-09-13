@@ -17,20 +17,22 @@
 
 <style lang="scss" scoped>
   .c_header_bar {
-    width: 100%;
-    height: 50px;
-    font-size: 1em;
-    color: #ffffff;
-    margin: 0;
-    padding: 0 40px;
+    align-items: center;
     background-color: var(--primary);
     border-bottom: var(--primary) solid 1px;
     box-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
-    flex-shrink: 0;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
+    color: #ffffff;
     display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    font-size: 1em;
+    height: 50px;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    width: 100%;
 
     .content_left,
     .content_right {

@@ -42,55 +42,19 @@ const demoData = {
   authors: [
     {
       id: 'author-1',
-      firstName: 'V.E.',
-      lastName: 'Schwab',
+      name: 'V.E. Schwab',
     },
     {
       id: 'author-2',
-      firstName: 'James S.A.',
-      lastName: 'Corey',
+      name: 'James S.A. Corey',
     },
     {
       id: 'author-3',
-      firstName: 'Peter F.',
-      lastName: 'Hamilton',
+      name: 'Peter F. Hamilton',
     },
     {
       id: 'author-4',
-      firstName: 'John',
-      lastName: 'Grisham',
-    },
-  ],
-  authorBook: [
-    {
-      id: 'author-book-1',
-      bookId: 'book-1',
-      authorId: 'author-2',
-    },
-    {
-      id: 'author-book-2',
-      bookId: 'book-2',
-      authorId: 'author-2',
-    },
-    {
-      id: 'author-book-3',
-      bookId: 'book-3',
-      authorId: 'author-3',
-    },
-    {
-      id: 'author-book-4',
-      bookId: 'book-4',
-      authorId: 'author-3',
-    },
-    {
-      id: 'author-book-5',
-      bookId: 'book-5',
-      authorId: 'author-1',
-    },
-    {
-      id: 'author-book-6',
-      bookId: 'book-6',
-      authorId: 'author-4',
+      name: 'John Grisham',
     },
   ],
   series: [

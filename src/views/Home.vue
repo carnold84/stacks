@@ -33,7 +33,7 @@
               :key="author.id"
               :to="`/author/${author.id}`"
             >
-              {{ author.lastName }}, {{ author.firstName }}
+              {{ author.name }}
             </c-link>
           </c-table-cell>
           <c-table-cell>

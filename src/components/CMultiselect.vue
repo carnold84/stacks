@@ -1,13 +1,20 @@
 <template>
   <div class="c_multiselect">
     <multiselect
+      v-bind="$props"
       v-model="value"
       :hideSelected="true"
-      :options="options"
+      :internal-search="isSearchable"
       label="label"
+      :limit="10"
+      :loading="isLoading"
       :multiple="isMulti"
+      :options="options"
+      :options-limit="10"
       :placeholder="placeholder"
+      :searchable="isSearchable"
       track-by="id"
+      @search-change="$emit('search-change', $event)"
     />
   </div>
 </template>
@@ -20,10 +27,28 @@
     components: {
       Multiselect,
     },
-    emits: ['update:modelValue'],
+    emits: ['update:modelValue', 'search-change'],
     props: {
+      id: {
+        required: true,
+        type: String,
+      },
+      isLoading: {
+        default() {
+          return false;
+        },
+        type: Boolean,
+      },
       isMulti: {
-        default: false,
+        default() {
+          return false;
+        },
+        type: Boolean,
+      },
+      isSearchable: {
+        default() {
+          return false;
+        },
         type: Boolean,
       },
       modelValue: {

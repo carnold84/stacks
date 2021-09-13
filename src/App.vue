@@ -1,5 +1,10 @@
 <template>
-  <c-message-screen v-if="isLoading">Loading...</c-message-screen>
+  <c-message-screen
+    v-if="isLoading"
+    style="height: 100%; position: absolute; width: 100%"
+  >
+    Loading...
+  </c-message-screen>
   <l-app v-else>
     <template v-slot:header>
       <c-header-bar>

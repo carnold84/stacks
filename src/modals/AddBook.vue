@@ -4,7 +4,7 @@
     :id="id"
     title="Add Book"
     @accept="onSave"
-    @cancel="$emit('cancel', this.id)"
+    @cancel="$emit('close')"
   >
     <c-message-screen v-if="isSaving" style="min-height: 200px">
       Saving...
@@ -20,6 +20,7 @@
         />
         <c-multiselect
           v-model="authors"
+          id="authors"
           :is-multi="true"
           :options="authorOptions"
           placeholder="Select authors..."
@@ -27,6 +28,7 @@
         />
         <c-multiselect
           v-model="series"
+          id="series"
           :is-multi="false"
           :options="seriesOptions"
           placeholder="Select series..."
@@ -71,10 +73,10 @@
       authorOptions() {
         const authors = this.$store.getters['authors/getAll'];
 
-        return authors.map(({ firstName, id, lastName }) => {
+        return authors.map(({ id, name }) => {
           return {
             id,
-            label: `${lastName}, ${firstName}`,
+            label: name,
             value: id,
           };
         });
@@ -114,7 +116,7 @@
 
         this.isSaving = false;
 
-        this.$emit('cancel', this.id);
+        this.$emit('close');
       },
     },
   };
