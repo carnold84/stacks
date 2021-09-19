@@ -1,4 +1,4 @@
-import api from '@/api';
+//import api from '@/api';
 
 export default {
   namespaced: true,
@@ -7,7 +7,6 @@ export default {
       allIds: [],
       byId: {},
     },
-    authorBook: [],
   },
   getters: {
     getAll(state) {
@@ -15,34 +14,21 @@ export default {
         return state.authors.byId[id];
       });
     },
-    getByBookId: (state) => (id) => {
-      const authors = [];
-      state.authorBook.forEach(({ authorId, bookId }) => {
-        if (bookId === id) {
-          const author = state.authors.byId[authorId];
-          authors.push(author);
-        }
-      });
-
-      return authors;
-    },
     getById: (state) => (id) => {
       return state.authors.byId[id];
     },
   },
   actions: {
-    async load({ commit }) {
-      const authors = await api.authors.getAll();
-
-      authors.forEach((element) => {
-        commit('add', element);
-      });
+    create({ commit }, author) {
+      commit('add', author);
     },
   },
   mutations: {
     add(state, author) {
-      state.authors.allIds.push(author.id);
-      state.authors.byId[author.id] = author;
+      if (!state.authors.allIds.includes(author.id)) {
+        state.authors.allIds.push(author.id);
+        state.authors.byId[author.id] = author;
+      }
     },
   },
 };

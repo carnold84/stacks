@@ -1,4 +1,4 @@
-import api from '@/api';
+//import api from '@/api';
 
 export default {
   namespaced: true,
@@ -19,18 +19,16 @@ export default {
     },
   },
   actions: {
-    async load({ commit }) {
-      const series = await api.series.getAll();
-
-      series.forEach((element) => {
-        commit('add', element);
-      });
+    create({ commit }, author) {
+      commit('add', author);
     },
   },
   mutations: {
     add(state, series) {
-      state.series.allIds.push(series.id);
-      state.series.byId[series.id] = series;
+      if (!state.series.allIds.includes(series.id)) {
+        state.series.allIds.push(series.id);
+        state.series.byId[series.id] = series;
+      }
     },
   },
 };

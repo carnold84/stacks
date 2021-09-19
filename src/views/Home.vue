@@ -119,6 +119,7 @@
     },
     computed: {
       books() {
+        console.log(this.$store.getters['books/getAll']);
         return this.$store.getters['books/getAll'];
       },
     },

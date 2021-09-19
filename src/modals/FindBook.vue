@@ -105,7 +105,7 @@
 
         console.log('onSave');
 
-        await this.$store.dispatch('books/add', {
+        await this.$store.dispatch('books/create', {
           authors: this.authors,
           bookNumber: this.bookNumber,
           series: this.series,

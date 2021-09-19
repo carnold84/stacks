@@ -57,6 +57,38 @@ const demoData = {
       name: 'John Grisham',
     },
   ],
+  authorBook: [
+    {
+      id: 'author-book-1',
+      bookId: 'book-1',
+      authorId: 'author-2',
+    },
+    {
+      id: 'author-book-2',
+      bookId: 'book-2',
+      authorId: 'author-2',
+    },
+    {
+      id: 'author-book-3',
+      bookId: 'book-3',
+      authorId: 'author-3',
+    },
+    {
+      id: 'author-book-4',
+      bookId: 'book-4',
+      authorId: 'author-3',
+    },
+    {
+      id: 'author-book-5',
+      bookId: 'book-5',
+      authorId: 'author-1',
+    },
+    {
+      id: 'author-book-6',
+      bookId: 'book-6',
+      authorId: 'author-4',
+    },
+  ],
   series: [
     {
       id: 'series-1',
@@ -99,6 +131,38 @@ const request = (callback) => {
       }
     }, 500);
   });
+};
+
+const getBook = async (id) => {
+  const state = await getState();
+
+  let book = state.books.filter((book) => {
+    return book.id === id;
+  })[0];
+
+  book = { ...book };
+  const authorIds = [];
+
+  state.authorBook.forEach(({ authorId, bookId }) => {
+    if (bookId === book.id) {
+      authorIds.push(authorId);
+    }
+  });
+
+  const authors = state.authors.filter(({ id }) => {
+    return authorIds.includes(id);
+  });
+  const series = state.series.filter(({ id }) => {
+    return book.seriesId === id;
+  })[0];
+  delete book.authorIds;
+  delete book.seriesId;
+
+  return {
+    ...book,
+    authors,
+    series,
+  };
 };
 
 const api = {
@@ -233,16 +297,20 @@ const api = {
       return await request(async () => {
         const state = await getState();
 
-        return state.books;
+        console.log(JSON.stringify(state.books, null, 2));
+
+        const books = [];
+        for (let { id } of state.books) {
+          const book = await getBook(id);
+          books.push(book);
+        }
+
+        return books;
       });
     },
     getById: async (id) => {
       return await request(async () => {
-        const state = await getState();
-
-        return state.books.filter((book) => {
-          return book.id === id;
-        })[0];
+        return getBook(id);
       });
     },
     update: async (data) => {

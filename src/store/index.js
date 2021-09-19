@@ -8,11 +8,7 @@ export default createStore({
   strict: true,
   actions: {
     async loadData({ dispatch }) {
-      await Promise.all([
-        dispatch('books/load'),
-        dispatch('authors/load'),
-        dispatch('series/load'),
-      ]);
+      await Promise.all([dispatch('books/load')]);
     },
   },
   modules: {
