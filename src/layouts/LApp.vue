@@ -1,6 +1,6 @@
 <template>
   <div class="l_app">
-    <slot name="header"></slot>
+    <slot name="side-bar"></slot>
     <div class="content">
       <slot></slot>
     </div>
@@ -14,11 +14,16 @@
 </script>
 
 <style lang="scss" scoped>
-  .l_form {
+  .l_app {
     display: flex;
-    flex-direction: column;
+    min-height: 100vh;
     position: relative;
     width: 100%;
+
+    .sidebar {
+      height: 100%;
+      position: relative;
+    }
 
     .content {
       flex-grow: 1;

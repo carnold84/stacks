@@ -33,6 +33,6 @@
 <style lang="scss" scoped>
   .c_logo {
     fill: var(--logo-fill);
-    height: 24px;
+    width: 20px;
   }
 </style>

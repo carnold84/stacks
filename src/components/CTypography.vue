@@ -1,5 +1,8 @@
 <template>
-  <component :is="component" :class="['c_typography', variant]">
+  <component
+    :is="component"
+    :class="['c_typography', variant, { 'has-margin': hasMargin }]"
+  >
     <slot />
   </component>
 </template>
@@ -14,6 +17,12 @@
         },
         type: [Object, String],
       },
+      hasMargin: {
+        default() {
+          return true;
+        },
+        type: Boolean,
+      },
       variant: {
         default() {
           return 'p';
@@ -27,45 +36,49 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .c_typography {
     color: var(--text1);
     font-weight: 400;
-    margin: 0 0 15px;
-  }
+    margin: 0;
 
-  .c_typography.h1 {
-    font-size: 3.2rem;
-    line-height: 4.2rem;
-  }
+    .has-margin {
+      margin: 0 0 15px;
+    }
 
-  .c_typography.h2 {
-    font-size: 2.9rem;
-    line-height: 3.9rem;
-  }
+    &.h1 {
+      font-size: 3.2rem;
+      line-height: 4.2rem;
+    }
 
-  .c_typography.h3 {
-    font-size: 2.6rem;
-    line-height: 3.6rem;
-  }
+    &.h2 {
+      font-size: 2.9rem;
+      line-height: 3.9rem;
+    }
 
-  .c_typography.h4 {
-    font-size: 2.3rem;
-    line-height: 3.3rem;
-  }
+    &.h3 {
+      font-size: 2.6rem;
+      line-height: 3.6rem;
+    }
 
-  .c_typography.h5 {
-    font-size: 2rem;
-    line-height: 3rem;
-  }
+    &.h4 {
+      font-size: 2.3rem;
+      line-height: 3.3rem;
+    }
 
-  .c_typography.h6 {
-    font-size: 1.7rem;
-    line-height: 2.7rem;
-  }
+    &.h5 {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
 
-  .c_typography.p {
-    font-size: 1.4rem;
-    line-height: 2.4rem;
+    &.h6 {
+      font-size: 1.7rem;
+      line-height: 2.7rem;
+    }
+
+    &.p {
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+    }
   }
 </style>

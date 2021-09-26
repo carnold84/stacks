@@ -1,11 +1,5 @@
 <template>
-  <c-modal
-    acceptText="Select"
-    :id="id"
-    title="Find Books"
-    @accept="onSave"
-    @cancel="$emit('close')"
-  >
+  <c-panel :id="id" title="Find Books" @cancel="$emit('close')">
     <c-text-field
       v-model="query"
       id="query"
@@ -25,26 +19,26 @@
         <c-table-cell>{{ book.authors }}</c-table-cell>
       </c-table-row>
     </c-table>
-  </c-modal>
+  </c-panel>
 </template>
 
 <script>
   import CTextField from '@/components/CTextField.vue';
-  import CModal from '@/components/CModal.vue';
   import CMessageScreen from '../components/CMessageScreen.vue';
   import CTable from '../components/CTable.vue';
   import CTableRow from '../components/CTableRow.vue';
   import CTableCell from '../components/CTableCell.vue';
+  import CPanel from '../components/CPanel.vue';
 
   export default {
     name: 'AddBook',
     components: {
       CTextField,
-      CModal,
       CMessageScreen,
       CTable,
       CTableRow,
       CTableCell,
+      CPanel,
     },
 
     data() {
